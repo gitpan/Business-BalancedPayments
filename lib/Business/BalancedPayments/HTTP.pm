@@ -1,6 +1,6 @@
 package Business::BalancedPayments::HTTP;
 {
-  $Business::BalancedPayments::HTTP::VERSION = '0.0001'; # TRIAL
+  $Business::BalancedPayments::HTTP::VERSION = '0.0001';
 }
 use Moo::Role;
 

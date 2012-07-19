@@ -1,6 +1,6 @@
 package Business::BalancedPayments;
 {
-  $Business::BalancedPayments::VERSION = '0.0001'; # TRIAL
+  $Business::BalancedPayments::VERSION = '0.0001';
 }
 use Moo;
 with 'Business::BalancedPayments::HTTP';
