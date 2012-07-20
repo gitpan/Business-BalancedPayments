@@ -1,8 +1,8 @@
 package Business::BalancedPayments::HTTP;
 {
-  $Business::BalancedPayments::HTTP::VERSION = '0.0001';
+  $Business::BalancedPayments::HTTP::VERSION = '0.0100';
 }
-use Moo::Role;
+use Moose::Role;
 
 use HTTP::Request::Common qw(GET POST PUT);
 use JSON qw(from_json to_json);
@@ -52,18 +52,14 @@ sub _req {
     $req->authorization_basic($self->secret);
     $req->header(content_type => 'application/json');
     my $res = $self->ua->request($req);
-    _check_res($res);
+    return undef if $res->code == 404;
+    die $res unless $res->is_success;
     return $res->content ? from_json($res->content) : 1;
 }
 
 sub _url {
     my ($self, $path) = @_;
     return $path =~ /^http/ ? $path : $self->base_url . $path;
-}
-
-sub _check_res {
-    my ($res) = @_;
-    die $res unless $res->is_success;
 }
 
 1;
@@ -77,7 +73,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0001
+version 0.0100
 
 =head1 AUTHORS
 
