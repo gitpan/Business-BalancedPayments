@@ -1,6 +1,6 @@
 package Business::BalancedPayments::HTTP;
 {
-  $Business::BalancedPayments::HTTP::VERSION = '0.0100';
+  $Business::BalancedPayments::HTTP::VERSION = '0.0200';
 }
 use Moose::Role;
 
@@ -21,6 +21,7 @@ has ua => (
         return $ua;
     },
 );
+has retries => (is => 'ro', default => 0);
 
 sub get {
     my ($self, $path) = @_;
@@ -52,7 +53,12 @@ sub _req {
     $req->authorization_basic($self->secret);
     $req->header(content_type => 'application/json');
     my $res = $self->ua->request($req);
-    return undef if $res->code == 404;
+    my $retries = $self->retries;
+    while ($res->code =~ /^5/ and $retries--) {
+        sleep 1;
+        $res = $self->ua->request($req);
+    }
+    return undef if $res->code =~ /404|410/;
     die $res unless $res->is_success;
     return $res->content ? from_json($res->content) : 1;
 }
@@ -73,7 +79,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0100
+version 0.0200
 
 =head1 AUTHORS
 
