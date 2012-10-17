@@ -1,6 +1,6 @@
 package Business::BalancedPayments::HTTP;
 {
-  $Business::BalancedPayments::HTTP::VERSION = '0.0200';
+  $Business::BalancedPayments::HTTP::VERSION = '0.0201';
 }
 use Moose::Role;
 
@@ -79,7 +79,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0200
+version 0.0201
 
 =head1 AUTHORS
 

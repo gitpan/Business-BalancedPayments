@@ -1,6 +1,6 @@
 package Business::BalancedPayments;
 {
-  $Business::BalancedPayments::VERSION = '0.0200';
+  $Business::BalancedPayments::VERSION = '0.0201';
 }
 use Moose;
 with 'Business::BalancedPayments::HTTP';
@@ -179,6 +179,12 @@ sub invalidate_bank_account {
     return $self->update_bank_account({ id => $bank_id, is_valid => 0 });
 }
 
+sub get_credit {
+    my ($self, $id) = @_;
+    croak 'The id param is missing' unless defined $id;
+    return $self->get($self->marketplace->{credits_uri} . "/$id");
+}
+
 sub create_credit {
     my ($self, $credit, %args) = @_;
     my $account = $args{account};
@@ -220,7 +226,7 @@ Business::BalancedPayments - BalancedPayments API bindings
 
 =head1 VERSION
 
-version 0.0200
+version 0.0201
 
 =head1 SYNOPSIS
 
@@ -590,10 +596,18 @@ This is a convenience method that does the equivalent of:
 Returns a bank account hashref.
 See L</get_bank_account> for an example response.
 
+=head2 get_credit
+
+    get_credit($credit_id);
+
+Gets a credit.
+This is a way to get information about a specific credit, which can be useful
+to check its status or get fee information about it.
+
 =head2 create_credit
 
-    create_credit($credit, account => $account)
-    create_credit($credit, bank_account => $bank_account)
+    create_credit($credit, account => $account);
+    create_credit($credit, bank_account => $bank_account);
 
 Creates a credit.
 This is a way of sending money to merchant accounts.
