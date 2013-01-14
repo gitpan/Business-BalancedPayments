@@ -1,6 +1,6 @@
 package Business::BalancedPayments::HTTP;
 {
-  $Business::BalancedPayments::HTTP::VERSION = '0.0201';
+  $Business::BalancedPayments::HTTP::VERSION = '0.0500';
 }
 use Moose::Role;
 
@@ -52,11 +52,14 @@ sub _req {
     my ($self, $req) = @_;
     $req->authorization_basic($self->secret);
     $req->header(content_type => 'application/json');
+    $self->_log_request($req);
     my $res = $self->ua->request($req);
+    $self->_log_response($res);
     my $retries = $self->retries;
     while ($res->code =~ /^5/ and $retries--) {
         sleep 1;
         $res = $self->ua->request($req);
+        $self->_log_response($res);
     }
     return undef if $res->code =~ /404|410/;
     die $res unless $res->is_success;
@@ -66,6 +69,17 @@ sub _req {
 sub _url {
     my ($self, $path) = @_;
     return $path =~ /^http/ ? $path : $self->base_url . $path;
+}
+
+sub _log_request {
+    my ($self, $req) = @_;
+    $self->log(DEBUG => $req->method . ' => ' . $req->uri);
+}
+
+sub _log_response {
+    my ($self, $res) = @_;
+    $self->log(DEBUG => $res->status_line);
+    $self->log(DEBUG => $res->content);
 }
 
 1;
@@ -79,7 +93,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0201
+version 0.0500
 
 =head1 AUTHORS
 
