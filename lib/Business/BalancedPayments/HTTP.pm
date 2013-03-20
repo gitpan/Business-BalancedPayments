@@ -1,6 +1,6 @@
 package Business::BalancedPayments::HTTP;
 {
-  $Business::BalancedPayments::HTTP::VERSION = '0.0500';
+  $Business::BalancedPayments::HTTP::VERSION = '0.0700';
 }
 use Moose::Role;
 
@@ -73,18 +73,25 @@ sub _url {
 
 sub _log_request {
     my ($self, $req) = @_;
-    $self->log(DEBUG => $req->method . ' => ' . $req->uri);
+    $self->log($req->method . ' => ' . $req->uri);
+    my $content = $req->content;
+    return unless length $content;
+    eval { $content = to_json from_json $content };
+    $self->log($content);
 }
 
 sub _log_response {
     my ($self, $res) = @_;
-    $self->log(DEBUG => $res->status_line);
-    $self->log(DEBUG => $res->content);
+    $self->log($res->status_line);
+    my $content = $res->content;
+    eval { $content = to_json from_json $content };
+    $self->log($content);
 }
 
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -93,7 +100,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0500
+version 0.0700
 
 =head1 AUTHORS
 
@@ -101,11 +108,15 @@ version 0.0500
 
 =item *
 
+Khaled Hussein <khaled.hussein@gmail.com>
+
+=item *
+
 Naveed Massjouni <naveedm9@gmail.com>
 
 =item *
 
-Khaled Hussein <khaled.hussein@gmail.com>
+Will Wolf<throughnothing@gmail.com>
 
 =back
 
@@ -117,4 +128,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

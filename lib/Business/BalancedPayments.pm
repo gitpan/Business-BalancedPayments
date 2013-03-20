@@ -1,6 +1,6 @@
 package Business::BalancedPayments;
 {
-  $Business::BalancedPayments::VERSION = '0.0500';
+  $Business::BalancedPayments::VERSION = '0.0700';
 }
 use Moose;
 with 'Business::BalancedPayments::HTTP';
@@ -17,9 +17,9 @@ has merchants_uri    => (is => 'ro', default => sub { '/v1/merchants'    });
 has marketplaces_uri => (is => 'ro', default => sub { '/v1/marketplaces' });
 
 sub log {
-    my ($self, $level, $msg) = @_;
+    my ($self, $msg) = @_;
     return unless $self->logger;
-    $self->logger->$level($msg);
+    $self->logger->DEBUG("BP: $msg");
 }
 
 sub _build_merchant {
@@ -134,11 +134,13 @@ sub create_hold {
 }
 
 sub capture_hold {
-    my ($self, $hold) = @_;
-    croak 'The hold param must be a hashref' unless ref $hold eq 'HASH';
-    croak 'No hold uri found' unless $hold->{uri};
-    return $self->post(
-        $self->marketplace->{debits_uri}, { hold_uri => $hold->{uri} });
+    my ($self, $hold, $params) = @_;
+    croak 'The hold param is missing' unless $hold;
+    croak 'The optional extra params must be a hashref'
+        if $params and ref $params ne 'HASH';
+    my $hold_uri = ref $hold eq 'HASH' ? $hold->{uri} : $hold;
+    my $data = { hold_uri => $hold_uri, %$params };
+    return $self->post($self->marketplace->{debits_uri}, $data);
 }
 
 sub get_debit {
@@ -221,7 +223,7 @@ sub create_credit {
     my $bank_account = $args{bank_account};
     croak 'The credit param must be a hashref' unless ref $credit eq 'HASH';
     croak 'The credit must contain an amount' unless exists $credit->{amount};
-    croak 'An account or bank_account params is required'
+    croak 'An account or bank_account param is required'
         unless $account or $bank_account;
     my $credits_uri;
     if ($account) {
@@ -248,6 +250,7 @@ sub create_credit {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -256,7 +259,7 @@ Business::BalancedPayments - BalancedPayments API bindings
 
 =head1 VERSION
 
-version 0.0500
+version 0.0700
 
 =head1 SYNOPSIS
 
@@ -519,12 +522,25 @@ See L</get_hold> for an example response.
 =head2 capture_hold
 
     capture_hold($hold)
+    capture_hold($hold, {
+        amount                  => ...,
+        appears_on_statement_as => ...,
+        meta                    => ...,
+        description             => ...,
+        on_behalf_of_uri        => ...,
+        source_uri              => ...,
+        bank_account_uri        => ...,
+    })
 
 Capturing a hold will create a debit representing the flow of funds from the
 buyer's account to your marketplace.
+The C<hold> param is required and may be a hold object or a hold uri.
+A an optional hashref of extra parameters may be provided.
+They will be passed on to Balanced.
 
     my $hold = $bp->get_hold($hold_id);
-    $bp->capture_hold($hold);
+    my $merchant_account = $bp->get_account($merchant_id);
+    $bp->capture_hold($hold, { on_behalf_of_uri => $merchant_account->{uri} });
 
 Returns a debit hashref.
 Example response:
@@ -800,11 +816,15 @@ Example response:
 
 =item *
 
+Khaled Hussein <khaled.hussein@gmail.com>
+
+=item *
+
 Naveed Massjouni <naveedm9@gmail.com>
 
 =item *
 
-Khaled Hussein <khaled.hussein@gmail.com>
+Will Wolf<throughnothing@gmail.com>
 
 =back
 
@@ -816,4 +836,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
