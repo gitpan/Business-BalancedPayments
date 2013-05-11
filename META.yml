@@ -29,4 +29,4 @@ requires:
   LWP::UserAgent: 0
   Moose: 0
   Moose::Role: 0
-version: 0.0700
+version: 0.0800

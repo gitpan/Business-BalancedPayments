@@ -1,7 +1,4 @@
 package Business::BalancedPayments::HTTP;
-{
-  $Business::BalancedPayments::HTTP::VERSION = '0.0700';
-}
 use Moose::Role;
 
 use HTTP::Request::Common qw(GET POST PUT);
@@ -100,7 +97,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0700
+version 0.0800
 
 =head1 AUTHORS
 
