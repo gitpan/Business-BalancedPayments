@@ -97,7 +97,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0800
+version 0.0900
 
 =head1 AUTHORS
 

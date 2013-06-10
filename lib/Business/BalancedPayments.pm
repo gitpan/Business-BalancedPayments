@@ -2,7 +2,7 @@ package Business::BalancedPayments;
 use Moose;
 with 'Business::BalancedPayments::HTTP';
 
-our $VERSION = '0.0800'; # VERSION
+our $VERSION = '0.0900'; # VERSION
 
 use Carp qw(croak);
 
@@ -66,12 +66,9 @@ sub get_account_by_email {
 sub create_account {
     my ($self, $account, %args) = @_;
     my $card = $args{card};
+    $account ||= {};
     croak 'The account param must be a hashref' unless ref $account eq 'HASH';
-    croak 'The account requires an email_address field'
-        unless $account->{email_address};
-    my $existing_acct = $self->get_account_by_email($account->{email_address});
-    $existing_acct = $existing_acct->{items}[0];
-    return $existing_acct if $existing_acct;
+
     if ($card) {
         croak 'The card param must be a hashref' unless ref $card eq 'HASH';
         croak 'The card is missing a uri' unless $card->{uri};
@@ -276,7 +273,7 @@ Business::BalancedPayments - BalancedPayments API bindings
 
 =head1 VERSION
 
-version 0.0800
+version 0.0900
 
 =head1 SYNOPSIS
 
@@ -409,12 +406,13 @@ See L</get_account> for an example response.
 
 =head2 create_account
 
+    create_account()
     create_account($account)
     create_account($account, card => $card)
 
 Creates an account.
-An account hashref is required.
-The account hashref must have an email_address field:
+An account hashref is optional.
+The account hashref, if passed in, must have an email_address field:
 
     $bp->create_account({ email_address => 'bob@crowdtilt.com' });
 
