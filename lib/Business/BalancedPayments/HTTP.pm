@@ -9,12 +9,14 @@ has base_url => (
     is      => 'ro',
     default => sub { 'https://api.balancedpayments.com' }
 );
+has timeout => (is => 'ro', default => 10);
 has ua => (
     is      => 'ro',
     lazy    => 1,
     default => sub {
+        my $self = shift;
         my $ua = LWP::UserAgent->new();
-        $ua->timeout(10);
+        $ua->timeout($self->timeout);
         return $ua;
     },
 );
@@ -97,7 +99,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.0900
+version 0.1100
 
 =head1 AUTHORS
 
