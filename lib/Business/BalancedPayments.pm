@@ -1,8 +1,8 @@
 package Business::BalancedPayments;
-use Moose;
+use Moo;
 with 'Business::BalancedPayments::HTTP';
 
-our $VERSION = '0.1100'; # VERSION
+our $VERSION = '0.1101'; # VERSION
 
 use Carp qw(croak);
 
@@ -279,7 +279,7 @@ Business::BalancedPayments - BalancedPayments API bindings
 
 =head1 VERSION
 
-version 0.1100
+version 0.1101
 
 =head1 SYNOPSIS
 

@@ -24,8 +24,9 @@ my %WriteMakefileArgs = (
     "HTTP::Request::Common" => 0,
     "JSON" => 0,
     "LWP::UserAgent" => 0,
-    "Moose" => 0,
-    "Moose::Role" => 0
+    "Moo" => 0,
+    "Moo::Role" => 0,
+    "overload" => 0
   },
   "TEST_REQUIRES" => {
     "File::Find" => 0,
@@ -37,7 +38,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.1100",
+  "VERSION" => "0.1101",
   "test" => {
     "TESTS" => "t/*.t"
   }
