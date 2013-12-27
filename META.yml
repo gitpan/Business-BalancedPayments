@@ -30,4 +30,4 @@ requires:
   Moo: 0
   Moo::Role: 0
   overload: 0
-version: 0.1101
+version: 0.1200
