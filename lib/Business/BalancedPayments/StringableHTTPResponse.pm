@@ -7,13 +7,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Business::BalancedPayments::StringableHTTPResponse
 
 =head1 VERSION
 
-version 0.1200
+version 0.1201
 
 =head1 AUTHORS
 

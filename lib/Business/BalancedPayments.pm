@@ -2,7 +2,7 @@ package Business::BalancedPayments;
 use Moo;
 with 'Business::BalancedPayments::HTTP';
 
-our $VERSION = '0.1200'; # VERSION
+our $VERSION = '0.1201'; # VERSION
 
 use Carp qw(croak);
 
@@ -286,13 +286,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Business::BalancedPayments - BalancedPayments API bindings
 
 =head1 VERSION
 
-version 0.1200
+version 0.1201
 
 =head1 SYNOPSIS
 
