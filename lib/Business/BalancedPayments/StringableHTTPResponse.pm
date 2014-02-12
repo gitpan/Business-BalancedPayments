@@ -15,7 +15,7 @@ Business::BalancedPayments::StringableHTTPResponse
 
 =head1 VERSION
 
-version 0.1201
+version 0.1300
 
 =head1 AUTHORS
 
@@ -23,15 +23,19 @@ version 0.1201
 
 =item *
 
-Khaled Hussein <khaled.hussein@gmail.com>
+Al Newkirk <al@crowdtilt.com>
 
 =item *
 
-Naveed Massjouni <naveedm9@gmail.com>
+Khaled Hussein <khaled@crowdtilt.com>
 
 =item *
 
-Will Wolf<throughnothing@gmail.com>
+Naveed Massjouni <naveed@crowdtilt.com>
+
+=item *
+
+Will Wolf <will@crowdtilt.com>
 
 =back
 
