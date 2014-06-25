@@ -1,5 +1,6 @@
 package Business::BalancedPayments::StringableHTTPResponse;
 use Moo::Role;
+our $VERSION = '0.1501'; # VERSION
 use overload '""' => sub { $_[0]->status_line . "\n" . $_[0]->content };
 1;
 
@@ -15,7 +16,7 @@ Business::BalancedPayments::StringableHTTPResponse
 
 =head1 VERSION
 
-version 0.1500
+version 0.1501
 
 =head1 AUTHORS
 

@@ -33,4 +33,4 @@ requires:
   Moo: 0
   Moo::Role: 0
   overload: 0
-version: 0.1500
+version: 0.1501

@@ -1,6 +1,8 @@
 package Business::BalancedPayments::HTTP;
 use Moo::Role;
 
+our $VERSION = '0.1501'; # VERSION
+
 use HTTP::Request::Common qw(GET POST PUT);
 use JSON qw(decode_json encode_json);
 use LWP::UserAgent;
@@ -127,7 +129,7 @@ Business::BalancedPayments::HTTP
 
 =head1 VERSION
 
-version 0.1500
+version 0.1501
 
 =head1 AUTHORS
 
