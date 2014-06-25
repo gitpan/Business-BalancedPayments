@@ -15,7 +15,7 @@ Business::BalancedPayments::StringableHTTPResponse
 
 =head1 VERSION
 
-version 0.1300
+version 0.1500
 
 =head1 AUTHORS
 

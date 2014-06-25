@@ -2,7 +2,7 @@ package Business::BalancedPayments;
 use Moo;
 with 'Business::BalancedPayments::HTTP';
 
-our $VERSION = '0.1300'; # VERSION
+our $VERSION = '0.1500'; # VERSION
 
 use Carp qw(croak);
 
@@ -48,6 +48,12 @@ sub get_card {
     my ($self, $id) = @_;
     croak 'The id param is missing' unless defined $id;
     return $self->get($self->_uri($id, 'cards_uri'));
+}
+
+sub get_card_v1_1 {
+    my ($self, $id) = @_;
+    croak 'The id param is missing' unless defined $id;
+    return $self->get_v1_1($self->_uri($id, 'cards_uri'));
 }
 
 sub create_card {
@@ -296,6 +302,50 @@ sub create_credit {
     return $self->post($credits_uri, $credit);
 }
 
+sub create_check_recipient {
+    my ($self, %params) = @_;
+    my $name        = $params{name};
+    my $address1    = $params{address1};
+    my $address2    = $params{address2};
+    my $postal_code = $params{postal_code};
+    croak "The name param is required" unless $name;
+    croak "The address1 param is required" unless $address1;
+    croak "The postal_code param is required" unless $postal_code;
+
+    my $res = $self->post_v1_1('/check_recipients', {
+        name => $name,
+        address => {
+            line1 => $address1,
+            line2 => $address2,
+            postal_code => $postal_code,
+        },
+    }, 'v1_1');
+    _die_version_error() unless $res;
+    return $res->{check_recipients}[0];
+}
+
+sub create_check_recipient_credit {
+    my ($self, $credit, %args) = @_;
+    my $check_recipient = $args{check_recipient};
+    croak 'The check_recipient param must be a hashref'
+        unless ref $check_recipient eq 'HASH';
+    croak 'The check_recipient hashref needs an id'
+        unless $check_recipient->{id};
+    croak 'The credit param must be a hashref' unless ref $credit eq 'HASH';
+    croak 'The credit must contain an amount' unless exists $credit->{amount};
+
+    my $res = $self->post_v1_1(
+        "/check_recipients/$check_recipient->{id}/credits", $credit, 'v1_1');
+    _die_version_error() unless $res;
+    return $res->{credits}[0];
+}
+
+sub _die_version_error {
+    die "Error making check_recipients call. " .
+        "Check that you are using a suitable API Version";
+}
+
+
 # ABSTRACT: BalancedPayments API bindings
 
 
@@ -313,7 +363,7 @@ Business::BalancedPayments - BalancedPayments API bindings
 
 =head1 VERSION
 
-version 0.1300
+version 0.1500
 
 =head1 SYNOPSIS
 
