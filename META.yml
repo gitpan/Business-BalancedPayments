@@ -1,10 +1,10 @@
 ---
 abstract: 'BalancedPayments API bindings'
 author:
-  - 'Al Newkirk <al@crowdtilt.com>'
-  - 'Khaled Hussein <khaled@crowdtilt.com>'
-  - 'Naveed Massjouni <naveed@crowdtilt.com>'
-  - 'Will Wolf <will@crowdtilt.com>'
+  - 'Khaled Hussein <khaled@tilt.com>'
+  - 'Naveed Massjouni <naveed@tilt.com>'
+  - 'Al Newkirk <al@tilt.com>'
+  - 'Will Wolf <will@tilt.com>'
 build_requires:
   File::Spec: 0
   HTTP::Response: 0
@@ -17,9 +17,9 @@ build_requires:
   strict: 0
   warnings: 0
 configure_requires:
-  ExtUtils::MakeMaker: 6.30
+  ExtUtils::MakeMaker: 0
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.013, CPAN::Meta::Converter version 2.131560'
+generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.131560'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -29,8 +29,6 @@ requires:
   Carp: 0
   HTTP::Request::Common: 0
   JSON: 0
-  LWP::UserAgent: 0
   Moo: 0
-  Moo::Role: 0
-  overload: 0
-version: 0.1501
+  WebService::BaseClientRole: 0.0006
+version: 0.1502
