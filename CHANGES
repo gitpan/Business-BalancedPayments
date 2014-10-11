@@ -1,9 +1,39 @@
 ==================================================
-Changes from 2004-10-08 00:00:00 +0000 to present.
+Changes from 2004-10-12 00:00:00 +0000 to present.
 ==================================================
 
 -------------------------------------------
-version 1.0100 at 2014-10-06 22:29:20 +0000
+version 1.0200 at 2014-10-10 23:26:38 +0000
+-------------------------------------------
+
+  Change: bbf429aff4394aa70ace2bb3b32b4f7dc7aaf79c
+  Author: Naveed Massjouni <naveedm9@gmail.com>
+  Date : 2014-10-10 19:26:38 +0000
+
+    releasing v1.0200 
+
+  Change: 8fdc63b44d4ef966fb99b429b7b944ca3fb834f7
+  Author: Naveed Massjouni <naveedm9@gmail.com>
+  Date : 2014-10-10 19:23:45 +0000
+
+    moved the v1.1 documentation to the main module 
+
+  Change: 48586ec3b33de9f91728796be0023567a07432ae
+  Author: Naveed Massjouni <naveedm9@gmail.com>
+  Date : 2014-10-10 19:15:41 +0000
+
+    Merge pull request #41 from ironcamel/add-bank-v11
+
+    Added add_bank_account method to v1.1 
+
+  Change: 2c0abd7218a9f760389b971a9459eaa7c18ac824
+  Author: Naveed Massjouni <naveedm9@gmail.com>
+  Date : 2014-10-10 19:15:05 +0000
+
+    Added add_bank_account method to v1.1 
+
+-------------------------------------------
+version 1.0100 at 2014-10-06 22:27:20 +0000
 -------------------------------------------
 
   Change: e53af6c1cb98e22dce2349601ed0c27b38c63e92

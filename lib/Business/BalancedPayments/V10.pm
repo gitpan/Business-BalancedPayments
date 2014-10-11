@@ -2,6 +2,8 @@ package Business::BalancedPayments::V10;
 use Moo;
 with 'Business::BalancedPayments::Base';
 
+our $VERSION = '1.0200'; # VERSION
+
 use Carp qw(croak);
 
 has marketplaces_uri => ( is => 'ro', default => '/v1/marketplaces' );
@@ -240,7 +242,7 @@ Business::BalancedPayments::V10
 
 =head1 VERSION
 
-version 1.0100
+version 1.0200
 
 =head1 METHODS
 
