@@ -38,4 +38,4 @@ requires:
 resources:
   bugtracker: https://github.com/Crowdtilt/Business-BalancedPayments/issues
   repository: git://github.com/Crowdtilt/Business-BalancedPayments.git
-version: 1.0200
+version: 1.0300

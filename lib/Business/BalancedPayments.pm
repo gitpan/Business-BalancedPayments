@@ -1,6 +1,6 @@
 package Business::BalancedPayments;
 
-our $VERSION = '1.0200'; # VERSION
+our $VERSION = '1.0300'; # VERSION
 
 use Business::BalancedPayments::V10;
 use Business::BalancedPayments::V11;
@@ -33,7 +33,7 @@ Business::BalancedPayments - Balanced Payments API bindings
 
 =head1 VERSION
 
-version 1.0200
+version 1.0300
 
 =head1 SYNOPSIS
 
@@ -69,7 +69,7 @@ a uri. For example, the following two lines are equivalent:
     $bp->get_card('CC6J123');
     $bp->get_card('/cards/CC6J123');
 
-=head2 create
+=head2 client
 
     my $bp = Business::BalancedPayments->client(
         secret  => $secret,
@@ -219,6 +219,19 @@ Returns the customer.
 Example:
 
     $bp->create_customer({ name => 'Bob', email => 'bob@foo.com' });
+
+=head2 update_customer
+
+    update_customer($customer)
+
+Updates a customer.
+Returns the updated customer.
+
+Example:
+
+    my $customer = $bp->get_customer($customer_id);
+    $customer->{email} = 'sue@foo.com';
+    $bp->update_customer($customer);
 
 =head2 get_hold
 
