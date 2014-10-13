@@ -1,6 +1,6 @@
 package Business::BalancedPayments;
 
-our $VERSION = '1.0300'; # VERSION
+our $VERSION = '1.0301'; # VERSION
 
 use Business::BalancedPayments::V10;
 use Business::BalancedPayments::V11;
@@ -33,7 +33,7 @@ Business::BalancedPayments - Balanced Payments API bindings
 
 =head1 VERSION
 
-version 1.0300
+version 1.0301
 
 =head1 SYNOPSIS
 

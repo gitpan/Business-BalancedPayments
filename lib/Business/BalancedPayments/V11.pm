@@ -2,7 +2,7 @@ package Business::BalancedPayments::V11;
 use Moo;
 with 'Business::BalancedPayments::Base';
 
-our $VERSION = '1.0300'; # VERSION
+our $VERSION = '1.0301'; # VERSION
 
 use Carp qw(croak);
 use Method::Signatures;
@@ -33,7 +33,7 @@ around create_customer => _unpack_response('customers');
 
 method update_customer(HashRef $customer) {
     my $cust_href = $customer->{href} or croak 'The customer href is missing';
-    return $self->put($cust_href, $customer)->{bank_accounts}[0];
+    return $self->put($cust_href, $customer)->{customers}[0];
 }
 
 method get_hold(Str $id) {
@@ -172,7 +172,7 @@ Business::BalancedPayments::V11
 
 =head1 VERSION
 
-version 1.0300
+version 1.0301
 
 =head1 AUTHORS
 
