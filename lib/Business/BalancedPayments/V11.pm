@@ -2,10 +2,11 @@ package Business::BalancedPayments::V11;
 use Moo;
 with 'Business::BalancedPayments::Base';
 
-our $VERSION = '1.0301'; # VERSION
+our $VERSION = '1.0400'; # VERSION
 
 use Carp qw(croak);
 use Method::Signatures;
+use Scalar::Util qw(blessed);
 
 has marketplaces_uri => ( is => 'ro', default => '/marketplaces' );
 
@@ -131,6 +132,29 @@ method create_check_recipient(HashRef $rec) {
     return $res->{check_recipients}[0];
 }
 
+method get_dispute(Str $id) {
+    my $res = $self->get($self->_uri('disputes', $id));
+    return $res ? $res->{disputes}[0] : undef;
+}
+
+method get_disputes(
+    Defined :$start_date,
+    Defined :$end_date,
+    Int     :$limit,
+    Int     :$offset
+) {
+    my %params = (
+        ( limit  => $limit  ) x!! $limit,
+        ( offset => $offset ) x!! $offset,
+    );
+
+    $params{'created_at[>]'} = "$start_date" if $start_date;
+    $params{'created_at[<]'} = "$end_date" if $end_date;
+
+    my $res = $self->get($self->_uri('disputes'), \%params);
+    return $res ? $res->{disputes} : undef;
+}
+
 method create_check_recipient_credit(HashRef $credit, HashRef :$check_recipient!) {
     my $rec_id = $check_recipient->{id}
         or croak 'The check_recipient hashref needs an id';
@@ -172,7 +196,7 @@ Business::BalancedPayments::V11
 
 =head1 VERSION
 
-version 1.0301
+version 1.0400
 
 =head1 AUTHORS
 

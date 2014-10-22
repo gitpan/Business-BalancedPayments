@@ -2,7 +2,7 @@ package Business::BalancedPayments::Base;
 use Moo::Role;
 with 'WebService::Client';
 
-our $VERSION = '1.0301'; # VERSION
+our $VERSION = '1.0400'; # VERSION
 
 use Carp qw(croak);
 use HTTP::Request::Common qw(GET POST);
@@ -99,7 +99,7 @@ Business::BalancedPayments::Base
 
 =head1 VERSION
 
-version 1.0301
+version 1.0400
 
 =head1 AUTHORS
 
