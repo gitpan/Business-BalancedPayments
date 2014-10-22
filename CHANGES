@@ -3,8 +3,22 @@ Changes from 2004-10-24 00:00:00 +0000 to present.
 ==================================================
 
 -------------------------------------------
-version 1.0400 at 2014-10-22 18:30:12 +0000
+version 1.0401 at 2014-10-22 19:20:04 +0000
 -------------------------------------------
+
+  Change: 366ea027cda1f236124e49ce62e54b4ce4f42bee
+  Author: Naveed Massjouni <naveedm9@gmail.com>
+  Date : 2014-10-22 15:20:04 +0000
+
+    v1.0401 
+
+  Change: 6746f01a46b171b3d3bd7f21ae02bdf0e5ec09d2
+  Author: Ali Anari <ali@anari.me>
+  Date : 2014-10-22 12:28:37 +0000
+
+    Merge pull request #46 from aanari/master
+
+    v1.0400 
 
   Change: 5894e4fa3022cd7eeec718aae5bd7d03f428556e
   Author: Ali Anari <ali@anari.me>
@@ -12,11 +26,27 @@ version 1.0400 at 2014-10-22 18:30:12 +0000
 
     v1.0400 
 
+  Change: c0d7c60fdfe2914375140e44026036b045f08aab
+  Author: Ali Anari <ali@anari.me>
+  Date : 2014-10-22 12:11:08 +0000
+
+    Merge pull request #45 from aanari/master
+
+    Implement date range support to get_disputes 
+
   Change: ac1bdd3c0887e8942918561d4e74aa75f0e59c14
   Author: Ali Anari <ali@anari.me>
   Date : 2014-10-22 12:07:05 +0000
 
     Implement date range support to get_disputes 
+
+  Change: 85a6236bab525ab9cd41c1bad1c8c6a736d2da50
+  Author: Ali Anari <ali@anari.me>
+  Date : 2014-10-15 17:25:16 +0000
+
+    Merge pull request #44 from aanari/master
+
+    Added get_dispute and get_disputes to v1.1 
 
   Change: 1afa460cb7dda79939ab463675f8cc531d4e38b6
   Author: Ali Anari <ali@anari.me>

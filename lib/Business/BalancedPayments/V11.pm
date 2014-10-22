@@ -2,7 +2,7 @@ package Business::BalancedPayments::V11;
 use Moo;
 with 'Business::BalancedPayments::Base';
 
-our $VERSION = '1.0400'; # VERSION
+our $VERSION = '1.0401'; # VERSION
 
 use Carp qw(croak);
 use Method::Signatures;
@@ -196,7 +196,7 @@ Business::BalancedPayments::V11
 
 =head1 VERSION
 
-version 1.0400
+version 1.0401
 
 =head1 AUTHORS
 
