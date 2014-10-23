@@ -1,6 +1,38 @@
 ==================================================
-Changes from 2004-10-24 00:00:00 +0000 to present.
+Changes from 2004-10-25 00:00:00 +0000 to present.
 ==================================================
+
+-------------------------------------------
+version 1.0402 at 2014-10-23 19:56:41 +0000
+-------------------------------------------
+
+  Change: 36b2df2d5bc0ad5c6fe360c9f7851ba7eac30e0a
+  Author: Naveed Massjouni <naveedm9@gmail.com>
+  Date : 2014-10-23 15:50:12 +0000
+
+    Merge pull request #48 from ironcamel/paging
+
+    added get_all method to get all paged results 
+
+  Change: 75c5a6dc75113c8a4eca7b3f399f3998180256a8
+  Author: Naveed Massjouni <naveedm9@gmail.com>
+  Date : 2014-10-23 15:38:25 +0000
+
+    added get_all method to get all paged results 
+
+  Change: 5a506a86eff15330c198f252b57bcaf6a9ef7aae
+  Author: Ali Anari <ali@anari.me>
+  Date : 2014-10-23 13:33:47 +0000
+
+    Merge pull request #47 from aanari/master
+
+    v1.0402 improved pagination on get_disputes method 
+
+  Change: d84e1bc73e00e7565fbdc4725826227589f67424
+  Author: Ali Anari <ali@anari.me>
+  Date : 2014-10-23 13:07:02 +0000
+
+    v1.0402 improved pagination on get_disputes method 
 
 -------------------------------------------
 version 1.0401 at 2014-10-22 19:20:04 +0000

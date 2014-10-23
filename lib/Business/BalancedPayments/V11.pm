@@ -2,7 +2,7 @@ package Business::BalancedPayments::V11;
 use Moo;
 with 'Business::BalancedPayments::Base';
 
-our $VERSION = '1.0401'; # VERSION
+our $VERSION = '1.0402'; # VERSION
 
 use Carp qw(croak);
 use Method::Signatures;
@@ -137,22 +137,8 @@ method get_dispute(Str $id) {
     return $res ? $res->{disputes}[0] : undef;
 }
 
-method get_disputes(
-    Defined :$start_date,
-    Defined :$end_date,
-    Int     :$limit,
-    Int     :$offset
-) {
-    my %params = (
-        ( limit  => $limit  ) x!! $limit,
-        ( offset => $offset ) x!! $offset,
-    );
-
-    $params{'created_at[>]'} = "$start_date" if $start_date;
-    $params{'created_at[<]'} = "$end_date" if $end_date;
-
-    my $res = $self->get($self->_uri('disputes'), \%params);
-    return $res ? $res->{disputes} : undef;
+method get_disputes(HashRef $query = {}) {
+    return $self->get($self->_uri('disputes'), $query);
 }
 
 method create_check_recipient_credit(HashRef $credit, HashRef :$check_recipient!) {
@@ -161,6 +147,17 @@ method create_check_recipient_credit(HashRef $credit, HashRef :$check_recipient!
     croak 'The credit must contain an amount' unless $credit->{amount};
     my $res = $self->post("/check_recipients/$rec_id/credits", $credit);
     return $res->{credits}[0];
+}
+
+method get_all(HashRef $data) {
+    my ($key) = grep !/^(links|meta)$/, keys %$data;
+    croak "Could not find the top level resource" unless $key;
+    my $result = $data->{$key};
+    while ( my $next = $data->{meta}{next} ) {
+        $data = $self->get($next);
+        push @$result, @{ $data->{$key} };
+    }
+    return $result;
 }
 
 method _build_marketplaces { $self->get($self->marketplaces_uri) }
@@ -196,7 +193,7 @@ Business::BalancedPayments::V11
 
 =head1 VERSION
 
-version 1.0401
+version 1.0402
 
 =head1 AUTHORS
 
