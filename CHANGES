@@ -1,10 +1,24 @@
 ==================================================
-Changes from 2004-10-25 00:00:00 +0000 to present.
+Changes from 2004-10-30 00:00:00 +0000 to present.
 ==================================================
 
 -------------------------------------------
-version 1.0402 at 2014-10-23 19:56:41 +0000
+version 1.0500 at 2014-10-28 22:04:57 +0000
 -------------------------------------------
+
+  Change: 7b5432dcefdb9fce33d4a391297ee290e7850845
+  Author: Ali Anari <ali@anari.me>
+  Date : 2014-10-28 17:50:46 +0000
+
+    Merge pull request #50 from aanari/master
+
+    Added autopagination helper with callback support 
+
+  Change: df7f605d560e63efa79f08f0d9af763c27d34bec
+  Author: Ali Anari <ali@anari.me>
+  Date : 2014-10-28 17:45:31 +0000
+
+    Added autopagination helper with callback support 
 
   Change: 36b2df2d5bc0ad5c6fe360c9f7851ba7eac30e0a
   Author: Naveed Massjouni <naveedm9@gmail.com>
